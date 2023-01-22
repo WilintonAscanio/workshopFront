@@ -23,14 +23,13 @@ const getPokemons = async(url, searchTerm = "") => {
       experience: dataPokemon.data.base_experience,
       abilities: dataPokemon.data.abilities,
       number: dataPokemon.data.id,
-      type: dataPokemon.data.types[0].type.name
+      type: dataPokemon.data.types[0].type.name,
+      icons: dataPokemon.data.sprites.versions["generation-vii"].icons.front_default
       
     };
     listPokemons.push(newPokemon);
     if (index + 1 === pokemons.length) {
       console.log(listPokemons);
-    //   renderPokemons(listPokemons);
-    // renderPokemon(listPokemons);
     renderPokemons(listPokemons);
 
     }
@@ -71,7 +70,7 @@ const renderPokemons = (pokemons, index) => {
                 <section class="charizard-container">
                 <div class="title">
                     <figure>
-                        <img src="https://static.vecteezy.com/system/resources/previews/001/188/706/original/flame-png.png" alt="llama">
+                        <img src="${element.icons}" alt="llama">
                     </figure>
                     <h2>${element.name.toUpperCase()}</h2>
                 </div>
