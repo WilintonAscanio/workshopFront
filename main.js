@@ -17,19 +17,17 @@ const getPokemons = async(url, searchTerm = "") => {
     const dataPokemon = await axios.get(pokemom.url);
     const newPokemon = {
       name: pokemom.name,
-      image: dataPokemon.data.sprites.front_default,
+      image: dataPokemon.data.sprites.other.dream_world.front_default,
       weight: dataPokemon.data.weight,
       height: dataPokemon.data.height,
       experience: dataPokemon.data.base_experience,
       abilities: dataPokemon.data.abilities,
       number: dataPokemon.data.id,
-      type: dataPokemon.data.types[0].type.name
+      type: dataPokemon.data.types[0].type.name,
+      icon: dataPokemon.data.sprites.versions["generation-vii"].icons.front_default
     };
     listPokemons.push(newPokemon);
     if (index + 1 === pokemons.length) {
-      console.log(listPokemons);
-    //   renderPokemons(listPokemons);
-    // renderPokemon(listPokemons);
     renderPokemons(listPokemons);
 
     }
@@ -63,14 +61,13 @@ const renderPokemons = (pokemons, index) => {
     others.addEventListener('click', (e) => {
         e.preventDefault();
         mainContainer.innerHTML = '';
-        console.log(e.target.id);
         pokemons.forEach(element =>{
             if (e.target.id == element.name) {
                 mainContainer.innerHTML =  `
                 <section class="charizard-container">
                 <div class="title">
                     <figure>
-                        <img src="https://static.vecteezy.com/system/resources/previews/001/188/706/original/flame-png.png" alt="llama">
+                        <img src="${element.icon}" alt="llama">
                     </figure>
                     <h2>${element.name.toUpperCase()}</h2>
                 </div>
@@ -92,11 +89,11 @@ const renderPokemons = (pokemons, index) => {
                 <div class="row-info">
                     <div class="row-item">
                         <span class="title-info">TYPE</span>
-                        <span class="info-text">${element.type}</span>
+                        <span class="info-text">${element.type.toUpperCase()}</span>
                     </div>
                     <div class="row-item">
                         <span class="title-info">HABILITY</span>
-                        <span class="info-text">${renderAbilities(element.abilities)}</span>
+                        <span class="info-text">${renderAbilities(element.abilities).toUpperCase()}</span>
                     </div>
                 </div>
                 <div class="row-info">
@@ -123,9 +120,14 @@ const renderPokemons = (pokemons, index) => {
 
 
 
+const search = document.querySelector(".form__search");
 
-// // otherPokemon.addEventListener('click', () => {
-// //   console.log('hola');
-// // })
-
+search.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const inputSearch = document.querySelector("#inputSearch");
+  const searchTerm = inputSearch.value;
+  if (searchTerm) {
+    getPokemons(URL_API, searchTerm);
+  }
+});
 
