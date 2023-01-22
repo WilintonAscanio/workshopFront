@@ -23,6 +23,7 @@ body{
     padding: 15px;
     gap: 10px;
     border-radius: 15px 15px 0 0;
+    justify-content: space-between;
 }
 
 .encabezado figure img {
@@ -34,6 +35,33 @@ body{
     text-transform: uppercase;
 
 }
+
+.tittle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form__search input{
+    padding: 5px 15px;
+    opacity: 0.35;
+    border: none;
+}
+
+.form__search button{
+    padding: 5px 15px;
+    background-color:#f5f6fa;
+    border: none;
+}
+
+.form__search button:hover{
+    background-color:#44bd32;
+    cursor: pointer;
+    color: #fff;
+}
+
+
+
 .main-container{
     display: flex;
     justify-content: center;
@@ -75,24 +103,39 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 25px;
+    padding: 20px;
     border-radius: 15px;
     width: 40%;
-    gap: 20px;
+    gap: 10px;
+    
 }
 
 .row-info{
     display: flex;
     flex-direction: column;
     align-items: center;
+
+}
+
+.row-item{
+    display: flex;
+    width: 80%;
+    
+    
 }
 
 .title-info{
-    font-size: 20px;
+    font-size: 16px;
+    width: 50%;
 }
 .info-text{
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bolder;
+    width: 50%;
+    font-family: 'Courier New', Courier, monospace;
+    color: #009432;
+    
+    
 }
 
 .footer-content{
@@ -144,5 +187,7 @@ body{
         height: 60vh;
         transform: translateY(-100px);
     }
-
+    .info-text{
+        font-size: 30px;
+    }
 }

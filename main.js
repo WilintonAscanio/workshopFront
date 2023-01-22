@@ -17,13 +17,14 @@ const getPokemons = async(url, searchTerm = "") => {
     const dataPokemon = await axios.get(pokemom.url);
     const newPokemon = {
       name: pokemom.name,
-      image: dataPokemon.data.sprites.front_default,
+      image: dataPokemon.data.sprites.other.dream_world.front_default,
       weight: dataPokemon.data.weight,
       height: dataPokemon.data.height,
       experience: dataPokemon.data.base_experience,
       abilities: dataPokemon.data.abilities,
       number: dataPokemon.data.id,
       type: dataPokemon.data.types[0].type.name
+      
     };
     listPokemons.push(newPokemon);
     if (index + 1 === pokemons.length) {
@@ -124,8 +125,14 @@ const renderPokemons = (pokemons, index) => {
 
 
 
-// // otherPokemon.addEventListener('click', () => {
-// //   console.log('hola');
-// // })
+// const search = document.querySelector(".form__search");
 
+// search.addEventListener("submit", async (event) => {
+//   event.preventDefault();
+//   const inputSearch = document.querySelector("#inputSearch");
+//   //Los valores que JavaScript reconoce como false son: undefined, null, 0, '' (strig vacío), NaN.
+//   const searchTerm = inputSearch.value;
+//   if (searchTerm) {
+//     console.log(searchTerm);
+//     console.log(typeof searchTerm);
 
