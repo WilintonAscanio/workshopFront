@@ -108,21 +108,18 @@ body{
     width: 40%;
     gap: 10px;
     
+    
 }
 
 .row-info{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
 
 }
-
 .row-item{
     display: flex;
     width: 80%;
-    
-    
 }
 
 .title-info{
@@ -130,14 +127,11 @@ body{
     width: 50%;
 }
 .info-text{
-    font-size: 18px;
+    font-size: 25px;
     font-weight: bolder;
     width: 50%;
     font-family: 'Courier New', Courier, monospace;
     color: #009432;
-    padding: 5%;
-    
-    
 }
 
 .footer-content{
@@ -185,11 +179,12 @@ body{
         z-index: 2;
     }
     .info-pokemon{
+        margin-top: 10%;
         width: 85%;
         height: 60vh;
         transform: translateY(-100px);
     }
     .info-text{
-        font-size: 30px;
+        font-size: 20px;
     }
 }
