@@ -64,7 +64,6 @@ const renderPokemons2 = (pokemons) =>{
         e.preventDefault();
         pokemons.forEach(element =>{
             if (e.target.id == element.name) {
-                mainContainer.innerHTML = '';
                 mainContainer.innerHTML =  `
                 <section class="charizard-container">
                 <div class="title">
