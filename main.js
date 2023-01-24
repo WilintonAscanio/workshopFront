@@ -2,7 +2,7 @@ const mainContainer = document.getElementById('main-container');
 
 const otherPokemons = document.getElementById('otherPokemons');
 
-const URL_API = "https://pokeapi.co/api/v2/pokemon";
+const URL_API = "https://pokeapi.co/api/v2/pokemon/?limit=1000";
 
 const getPokemons = async (url, searchTerm = "") => {
 
