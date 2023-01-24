@@ -4,67 +4,70 @@ const otherPokemons = document.getElementById('otherPokemons');
 
 const URL_API = "https://pokeapi.co/api/v2/pokemon";
 
-const getPokemons = async(url, searchTerm = "") => {
+const getPokemons = async (url, searchTerm = "") => {
+
     const listPokemons = [];
     const response = await axios.get(url);
     const pokemons = searchTerm
-    ? response.data.results.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : response.data.results;
-//   console.log(pokemons);
-  pokemons.forEach(async (pokemom, index) => {
-    const dataPokemon = await axios.get(pokemom.url);
-    const newPokemon = {
-      name: pokemom.name,
-      image: dataPokemon.data.sprites.other.dream_world.front_default,
-      weight: dataPokemon.data.weight,
-      height: dataPokemon.data.height,
-      experience: dataPokemon.data.base_experience,
-      abilities: dataPokemon.data.abilities,
-      number: dataPokemon.data.id,
-      type: dataPokemon.data.types[0].type.name,
-      icon: dataPokemon.data.sprites.versions["generation-vii"].icons.front_default
-    };
-    listPokemons.push(newPokemon);
-    if (index + 1 === pokemons.length) {
-    renderPokemons(listPokemons);
-    renderPokemons2(listPokemons);
+        ? response.data.results.filter((pokemon) =>
+            pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        : response.data.results;
 
-    }
-  });
+    pokemons.forEach(async (pokemom, index) => {
+        const dataPokemon = await axios.get(pokemom.url);
+        const newPokemon = {
+            name: pokemom.name,
+            image: dataPokemon.data.sprites.other.dream_world.front_default,
+            weight: dataPokemon.data.weight,
+            height: dataPokemon.data.height,
+            experience: dataPokemon.data.base_experience,
+            abilities: dataPokemon.data.abilities,
+            number: dataPokemon.data.id,
+            type: dataPokemon.data.types[0].type.name,
+            icon: dataPokemon.data.sprites.versions["generation-vii"].icons.front_default
+        };
+        listPokemons.push(newPokemon);
+        if (index + 1 === pokemons.length) {
+            renderPokemonsBottom(listPokemons);
+            renderPokemon(listPokemons);
+
+        }
+    });
 };
 
 getPokemons(URL_API);
 
-const renderPokemons = (pokemons) => {
+const renderPokemonsBottom = (pokemons) => {
     const minPokemons = pokemons.slice(0, 4);
     otherPokemons.innerHTML = '';
     minPokemons.forEach(pokemon => {
         otherPokemons.innerHTML += `
         <figure>
         <img src="${pokemon.image}" alt="pokemon" id="${pokemon.name}">
-    </figure>`   
+    </figure>`
     })
-     
+
 }
+
 const renderAbilities = (arrayAbilities) => {
     let abilitiesList = "";
     arrayAbilities.forEach((ability) => {
-      abilitiesList += `
+        abilitiesList += `
           <span class="card__abilities">${ability.ability.name}</span>
           `;
     });
     return abilitiesList;
-  };
+};
+
 const others = document.querySelector('#otherPokemons');
 
-const renderPokemons2 = (pokemons) =>{
+const renderPokemon = (pokemons) => {
     others.addEventListener('click', (e) => {
         e.preventDefault();
-        pokemons.forEach(element =>{
+        pokemons.forEach(element => {
             if (e.target.id == element.name) {
-                mainContainer.innerHTML =  `
+                mainContainer.innerHTML = `
                 <section class="charizard-container">
                 <div class="title">
                     <figure>
@@ -108,13 +111,13 @@ const renderPokemons2 = (pokemons) =>{
                     </div>
                 </div>
             </article>`
-            
+
             }
-           
-            
+
+
         })
 
-        
+
     })
 
 }
@@ -125,14 +128,14 @@ const renderPokemons2 = (pokemons) =>{
 const search = document.querySelector(".form__search");
 
 search.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const inputSearch = document.querySelector("#inputSearch");
-  const searchTerm = inputSearch.value;
-  if (searchTerm) {
-    getPokemons(URL_API, searchTerm);
-  }
-  else if(searchTerm == ""){
-    getPokemons(URL_API, searchTerm);
-  }
+    event.preventDefault();
+    const inputSearch = document.querySelector("#inputSearch");
+    const searchTerm = inputSearch.value;
+    if (searchTerm) {
+        getPokemons(URL_API, searchTerm);
+    }
+    else if (searchTerm == "") {
+        getPokemons(URL_API);
+    }
 });
 
