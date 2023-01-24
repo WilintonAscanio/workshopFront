@@ -29,6 +29,7 @@ const getPokemons = async(url, searchTerm = "") => {
     listPokemons.push(newPokemon);
     if (index + 1 === pokemons.length) {
     renderPokemons(listPokemons);
+    renderPokemons2(listPokemons);
 
     }
   });
@@ -36,7 +37,7 @@ const getPokemons = async(url, searchTerm = "") => {
 
 getPokemons(URL_API);
 
-const renderPokemons = (pokemons, index) => {
+const renderPokemons = (pokemons) => {
     const minPokemons = pokemons.slice(0, 4);
     otherPokemons.innerHTML = '';
     minPokemons.forEach(pokemon => {
@@ -45,24 +46,27 @@ const renderPokemons = (pokemons, index) => {
         <img src="${pokemon.image}" alt="pokemon" id="${pokemon.name}">
     </figure>`   
     })
+     
+}
+const renderAbilities = (arrayAbilities) => {
+    let abilitiesList = "";
+    arrayAbilities.forEach((ability) => {
+      abilitiesList += `
+          <span class="card__abilities">${ability.ability.name}</span>
+          `;
+    });
+    return abilitiesList;
+  };
+const others = document.querySelector('#otherPokemons');
 
-    const renderAbilities = (arrayAbilities) => {
-        let abilitiesList = "";
-        arrayAbilities.forEach((ability) => {
-          abilitiesList += `
-              <span class="card__abilities">${ability.ability.name}</span>
-              `;
-        });
-        return abilitiesList;
-      };
-      
+console.log(others);
 
-    const others = document.querySelector('#otherPokemons');
+const renderPokemons2 = (pokemons) =>{
     others.addEventListener('click', (e) => {
         e.preventDefault();
-        mainContainer.innerHTML = '';
         pokemons.forEach(element =>{
             if (e.target.id == element.name) {
+                mainContainer.innerHTML = '';
                 mainContainer.innerHTML =  `
                 <section class="charizard-container">
                 <div class="title">
@@ -93,7 +97,7 @@ const renderPokemons = (pokemons, index) => {
                     </div>
                     <div class="row-item">
                         <span class="title-info">HABILITY</span>
-                        <span class="info-text">${renderAbilities(element.abilities).toUpperCase()}</span>
+                        <span class="info-text abilities">${renderAbilities(element.abilities).toUpperCase()}</span>
                     </div>
                 </div>
                 <div class="row-info">
@@ -115,8 +119,9 @@ const renderPokemons = (pokemons, index) => {
 
         
     })
-  
+
 }
+
 
 
 
@@ -127,6 +132,9 @@ search.addEventListener("submit", async (event) => {
   const inputSearch = document.querySelector("#inputSearch");
   const searchTerm = inputSearch.value;
   if (searchTerm) {
+    getPokemons(URL_API, searchTerm);
+  }
+  else if(searchTerm == ""){
     getPokemons(URL_API, searchTerm);
   }
 });
