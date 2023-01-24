@@ -59,8 +59,6 @@ const renderAbilities = (arrayAbilities) => {
   };
 const others = document.querySelector('#otherPokemons');
 
-console.log(others);
-
 const renderPokemons2 = (pokemons) =>{
     others.addEventListener('click', (e) => {
         e.preventDefault();
